@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .round__color__button{
+        width: 40px;
+        height: 40px;
+        border-width: 3px;
+        border-radius: 50%;
+        transition: 200ms;
+    }
+    .round__color__button:hover{
+        transform: scale(1.19);
+    }
+    .round__size__button{
+        width: 40px;
+        height: 40px;
+        border-width: 3px;
+        border-radius: 50%;
+        transition: 200ms;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .round__size__button:hover{
+        transform: scale(1.19);
+    }
+</style>
+<body>
+
+    <img id="BRUSH" src="images/BRUSH.png" style="width: 10px; height: 10px; display: none;">
+
+
+    <div style="display: flex; max-width: 1300px; margin: 0 auto; justify-content: space-between;">
+
+        <div style="display: flex; flex-wrap: wrap; margin: 15px; gap: 20px">
+            <button class="round__color__button" id="white" style="background-color: white;"></button>
+            <button class="round__color__button" id="black" style="background-color: black;"></button>
+            <button class="round__color__button" id="red" style="background-color: red;" onclick="selectColor(255, 0, 0)"></button>
+            <button class="round__color__button" id="orange" style="background-color: #ffa500;"></button>
+            <button class="round__color__button" id="yellow" style="background-color: rgb(255, 255, 0);"></button>
+            <button class="round__color__button" id="green" style="background-color: rgb(0, 128, 0);"></button>
+            <button class="round__color__button" id="blue" style="background-color: rgb(0, 0, 255);"></button>
+            <button class="round__color__button" id="indigo" style="background-color: rgb(75, 0, 130);"></button>
+            <button class="round__color__button" id="violet" style="background-color: rgb(238, 130, 238);"></button>
+        </div>
+
+
+        <div style="display: flex; flex-wrap: wrap; margin: 15px; gap: 20px;">
+            <button id="tiny_size" class="round__size__button" style="background-image: url(images/tiny.png);"></button>
+            <button id="very_small_size" class="round__size__button" style="background-image: url(images/very_small.png);"></button>
+            <button id="small_size" class="round__size__button" style="background-image: url(images/small.png);"></button>
+            <button id="medium_size" class="round__size__button" style="background-image: url(images/medium.png);"></button>
+            <button id="large_size" class="round__size__button" style="background-image: url(images/large.png);"></button>
+            <button id="very_large_size" class="round__size__button" style="background-image: url(images/very_large.png);"></button>
+        </div>
+    </div>
+    
+    <div id="cont" style="display: flex; justify-content: center;"></div>
+
+
+    <script src="cript.js"></script>
+</body>
+</html>

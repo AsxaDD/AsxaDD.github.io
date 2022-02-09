@@ -1,3 +1,5 @@
+
+
 onload = () => {
     const canvas = document.createElement('canvas');
     const cont = document.getElementById('cont');
@@ -70,6 +72,14 @@ onload = () => {
     let violet = document.getElementById('violet');
     violet.onclick = function(){ selectColor(238, 130, 238); }
 
+    document.getElementById('color').oninput = function () {
+        let bigint = parseInt(this.value.split('#')[1], 16);
+        let r = (bigint >> 16) & 255;
+        let g = (bigint >> 8) & 255;
+        let b = bigint & 255;
+        selectColor(r, g, b)
+    }
+
 
 
     selectColor(0, 0, 0);
@@ -77,7 +87,7 @@ onload = () => {
 
 
 
-    let size = 20;
+    let size = 4;
     let tinySize = document.getElementById('tiny_size');
     tinySize.onclick = function(){ size = 2 }
 
@@ -113,47 +123,89 @@ onload = () => {
     let prevY = null;
 
     
+    let workingBrushType = "default";
+
+
+    let default_brush_button = document.getElementById('default');
+    default_brush_button.onclick = function(){ 
+        workingBrushType = "default";
+        prevX = null;
+        prevY = null;
+    }
+
+    let line_button = document.getElementById('line');
+    line_button.onclick = function(){ 
+        workingBrushType = "line";
+        prevX = null;
+        prevY = null;
+    }
+
+    let kvadrat_button = document.getElementById('kvadrat');
+    kvadrat_button.onclick = function(){ 
+        workingBrushType = "kvadrat";
+        prevX = null;
+        prevY = null;
+    }
+    
+        
 
     canvas.onmousedown = e => {
-      console.log(e);
-      if (e.button == 0) {
+        console.log(e);
+        if (e.button == 0) {
 
-      [prevX, prevY] = getMouseCoords(e);
+        [prevX, prevY] = getMouseCoords(e);
 
-      drawBrush(prevX, prevY);
+        drawBrush(prevX + 1, prevY);
 
-      } else if (e.button == 1) {
-       [prevX, prevY] = getMouseCoords(e);
-       drawBrush(prevX, prevY);
-
-      } else if (e.button == 2) {
-       ctx.fillStyle = `rgb(255, 255, 255)`;
-       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      }
+        } else if (e.button == 2 && e.ctrlKey == true) {
+        ctx.fillStyle = `rgb(255, 255, 255)`;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+    
     }
 
     canvas.onmouseup = e => {
-      'if (e.button !== 0) {return ;}'
-      prevX = null;
-      prevY = null;
+        'if (e.button !== 0) {return ;}'
+        if (workingBrushType == "default"){
+            prevX = null;
+            prevY = null;
+        } else if (workingBrushType == "line"){
+            if (e.button == 0){
+                [x, y] = getMouseCoords(e);
+                forEachPixel(prevX, prevY, x, y, drawBrush);
+            }
+        } else if (workingBrushType == "kvadrat"){
+            if (e.button == 0){
+                [x, y] = getMouseCoords(e);
+                forEachPixel(prevX, prevY, x, prevY, drawBrush);
+                forEachPixel(prevX, prevY, prevX, y, drawBrush);
+
+                forEachPixel(x, prevY, x, y, drawBrush);
+                forEachPixel(prevX, y, x, y, drawBrush);
+            }
+        }        
     }
 
     onmousemove = e => {
-      if (prevX > canvas.width) {return;}
-      if (prevY > canvas.width) {return;}
+        if (workingBrushType == "default"){
+            if (prevX > canvas.width) {return;}
+            if (prevY > canvas.width) {return;}
 
-      if (prevX == null) {return;}
+            if (prevX == null) {return;}
 
-      [x, y] = getMouseCoords(e);
+            [x, y] = getMouseCoords(e);
 
-      forEachPixel(prevX, prevY, x, y, drawBrush)
+            
 
-      prevX = x;
-      prevY = y;
+            forEachPixel(prevX, prevY, x, y, drawBrush);
+
+            prevX = x;
+            prevY = y;
+        } else if (workingBrushType == "line" || workingBrushType == "kvadrat"){
+            let trash = 0;
+        }
     };
-
-//    drawSpiral(ctx);
-
+        
 };
 
 

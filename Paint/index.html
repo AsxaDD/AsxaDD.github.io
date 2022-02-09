@@ -13,6 +13,8 @@
         border-width: 3px;
         border-radius: 50%;
         transition: 200ms;
+        background-repeat: no-repeat;
+        background-size: cover;
     }
     .round__color__button:hover{
         transform: scale(1.19);
@@ -29,16 +31,45 @@
     .round__size__button:hover{
         transform: scale(1.19);
     }
+    .brush__button{
+        width: 40px;
+        height: 40px;
+        border-width: 3px;
+        border-radius: 20%;
+        transition: 200ms;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-right: 19px;
+    }
+    .brush__button:hover{
+        transform: scale(1.17);
+    }
+    #color{
+        width: 40px;
+        height: 40px;
+        border-width: 3px;
+        border-radius: 50%;
+        transition: 200ms;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url(images/rgb_circle.png);
+        text-decoration: none;
+        
+    }
+    #color:hover{
+        transform: scale(1.17);
+    }
 </style>
 <body>
 
     <img id="BRUSH" src="images/BRUSH.png" style="width: 10px; height: 10px; display: none;">
 
-
+   
     <div style="display: flex; max-width: 1300px; margin: 0 auto; justify-content: space-between;">
+        
 
         <div style="display: flex; flex-wrap: wrap; margin: 15px; gap: 20px">
-            <button class="round__color__button" id="white" style="background-color: white;"></button>
+            <button class="round__color__button" id="white" style="background-color: #FFF;"></button>
             <button class="round__color__button" id="black" style="background-color: black;"></button>
             <button class="round__color__button" id="red" style="background-color: red;" onclick="selectColor(255, 0, 0)"></button>
             <button class="round__color__button" id="orange" style="background-color: #ffa500;"></button>
@@ -47,6 +78,7 @@
             <button class="round__color__button" id="blue" style="background-color: rgb(0, 0, 255);"></button>
             <button class="round__color__button" id="indigo" style="background-color: rgb(75, 0, 130);"></button>
             <button class="round__color__button" id="violet" style="background-color: rgb(238, 130, 238);"></button>
+            <input type="color" id="color">
         </div>
 
 
@@ -60,9 +92,14 @@
         </div>
     </div>
     
-    <div id="cont" style="display: flex; justify-content: center;"></div>
+    <div style="display: flex; justify-content: center;">
 
+        <button id="default" class="brush__button" style=""></button>
+        <button id="line" class="brush__button" style="background-image: url(images/palochka_png.png);"></button>
+        <button id="kvadrat" class="brush__button" style="background-image: url(images/kvadrat.png);"></button>
+        <div id="cont" style="display: flex; justify-content: center; width: 1300;"></div>
+    </div>
 
-    <script src="cript.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
